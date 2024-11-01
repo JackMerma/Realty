@@ -163,7 +163,7 @@ fun RegistroScreen(modifier: Modifier = Modifier) {
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Image(
-                    painter = painterResource(id = R.drawable.google),
+                    painter = painterResource(id = R.drawable.google_ic),
                     contentDescription = "Google Icon",
                     modifier = Modifier
                         .size(36.dp)
