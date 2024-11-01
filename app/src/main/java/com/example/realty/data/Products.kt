@@ -1,4 +1,5 @@
 package com.example.realty.data
+import com.example.realty.R
 
 // Main product class
 data class Product(
@@ -6,14 +7,18 @@ data class Product(
     val price: String,
     val rating: Float,
     val reviews: Int,
-    val imageUrl: String
+    val imageId: Int
 )
 
-const val sample_product_url = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/aa53a0a800c846abb44aae8a00367e1d_9366/Zapatillas_Tensaur_Sport_Training_Cierre_de_Cordones_Blanco_GW6422_01_standard.jpg"
+val sample_product_id = R.drawable.shoes
+
 // Defining sample products
 val productList = listOf(
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_url),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_url),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_url),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_url)
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
 )
