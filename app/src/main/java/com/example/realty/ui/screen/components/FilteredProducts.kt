@@ -1,5 +1,6 @@
 package com.example.realty.ui.screen.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,22 +17,23 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.realty.data.Product
 import com.example.realty.data.productList
+import com.example.realty.R
 
 @Composable
 fun FilteredProducts(
@@ -43,14 +45,18 @@ fun FilteredProducts(
         Spacer(modifier = Modifier.height(16.dp))
         FilterOptions()
         Spacer(modifier = Modifier.height(16.dp))
-        ProductGrid(products = productList)
+        Card(
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xfff3f3f3))
+        ){
+            ProductGrid(products = productList)
+        }
     }
 }
 
 @Composable
 fun Header() {
     Column {
-        Text(text = "Headphone", fontSize = 16.sp, color = Color.Gray)
         Text(text = "TMA Wireless", fontSize = 24.sp, fontWeight = FontWeight.Bold)
     }
 }
@@ -59,9 +65,21 @@ fun Header() {
 fun FilterOptions() {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceAround
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Button(onClick = {}, colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)) {
+        OutlinedButton(
+            onClick = {},
+            shape = RoundedCornerShape(25),
+            border = BorderStroke(1.dp, Color.LightGray),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.filter),
+                contentDescription = "Filter",
+                modifier = Modifier.size(20.dp)
+            )
+            Spacer(modifier = Modifier.width(5.dp))
             Text(text = "Filter")
         }
         Text(text = "Popularity", modifier = Modifier.clickable {
@@ -81,9 +99,9 @@ fun ProductGrid(products: List<Product>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        contentPadding = PaddingValues(17.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(products.size) { index ->
             ProductCard(product = products[index])
@@ -94,47 +112,45 @@ fun ProductGrid(products: List<Product>) {
 @Composable
 fun ProductCard(product: Product) {
     Card(
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
                 // TODO: ?
-            }
+            },
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(id = product.imageId),
                 contentDescription = product.name,
-                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(120.dp)
-                    .padding(8.dp)
+                    .size(150.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = product.name, fontWeight = FontWeight.Bold)
-            Text(text = product.price, fontSize = 14.sp, color = Color.Black)
+            Text(text = product.name)
+            Text(text = product.price, fontSize = 14.sp, color = Color.Black, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(4.dp))
-            //RatingBar(rating = product.rating, reviews = product.reviews)
+            RatingBar(rating = product.rating, reviews = product.reviews)
         }
     }
 }
 
 @Composable
 fun RatingBar(rating: Float, reviews: Int) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        /*
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_star),
+            painter = painterResource(id = R.drawable.star),
             contentDescription = "Rating",
-            tint = Color(0xFFFFD700),
+            tint = Color(0xff0acf83),
             modifier = Modifier.size(16.dp)
         )
-        */
-        //Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(4.dp))
         Text(text = "$rating", fontSize = 14.sp)
         Spacer(modifier = Modifier.width(4.dp))
         Text(text = "($reviews Reviews)", fontSize = 12.sp, color = Color.Gray)
