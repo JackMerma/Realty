@@ -46,40 +46,6 @@ fun SearchProduct(
 }
 
 @Composable
-fun SearchBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .border(width = 1.dp, color = Color(0xffbababa), shape = RoundedCornerShape(25)),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.search),
-            contentDescription = "Search",
-            modifier = Modifier
-                .padding(end = 16.dp, start = 16.dp)
-                .size(19.dp),
-            tint = Color(0xffbababa),
-        )
-        Text(
-            text = "Buscar zapatilla",
-            color = Color(0xffbababa),
-            modifier = Modifier.padding(start = 8.dp)
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            painter = painterResource(id = R.drawable.filter2),
-            contentDescription = "Filter",
-            modifier = Modifier
-                .padding(end = 16.dp)
-                .size(30.dp),
-            tint = Color(0xffbababa),
-        )
-    }
-}
-
-@Composable
 fun LastSearchesSection(lastSearches: List<String>) {
     Column {
         Text(text = "Última búsqueda", style = MaterialTheme.typography.bodyLarge)
