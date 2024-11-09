@@ -20,10 +20,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,9 +38,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.realty.data.Product
 import com.example.realty.R
+import com.example.realty.data.Product
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FilteredProducts(
     modifier: Modifier,
@@ -43,16 +52,40 @@ fun FilteredProducts(
     // Getting the related list based in the query
     val relatedList = Search(query)
 
+    val sheetState = rememberModalBottomSheetState()
+    var isSheetOpen = remember {
+        mutableStateOf(false)
+    }
+    val scope = rememberCoroutineScope()
+    val filterSettings = remember { FilterSettings() }
+
     Column(modifier = modifier.padding(16.dp)) {
         Header()
         Spacer(modifier = Modifier.height(16.dp))
-        FilterOptions()
+        FilterOptionsSection(isSheetOpen)
         Spacer(modifier = Modifier.height(16.dp))
         Card(
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xfff3f3f3))
         ){
             ProductGrid(products = relatedList)
+        }
+    }
+
+    if (isSheetOpen.value){
+        ModalBottomSheet(
+            onDismissRequest = {
+                isSheetOpen.value = false
+            },
+            sheetState = sheetState
+        ) {
+            FilterContent(
+                filterSettings = filterSettings,
+                onApplyClick = {
+                    scope.launch { sheetState.hide() }
+                    // TODO: Apply filter settings
+                }
+            )
         }
     }
 }
@@ -65,14 +98,18 @@ fun Header() {
 }
 
 @Composable
-fun FilterOptions() {
+fun FilterOptionsSection(
+    isSheetOpen: MutableState<Boolean>
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
         OutlinedButton(
-            onClick = {},
+            onClick = {
+                isSheetOpen.value = true
+            },
             shape = RoundedCornerShape(25),
             border = BorderStroke(1.dp, Color.LightGray),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
