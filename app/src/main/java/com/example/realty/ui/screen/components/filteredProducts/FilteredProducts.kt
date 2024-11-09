@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.realty.R
 import com.example.realty.data.Product
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +52,7 @@ fun FilteredProducts(
     val relatedList = Search(query)
 
     val sheetState = rememberModalBottomSheetState()
-    var isSheetOpen = remember {
+    val isSheetOpen = remember {
         mutableStateOf(false)
     }
     val scope = rememberCoroutineScope()
@@ -82,7 +81,7 @@ fun FilteredProducts(
             FilterContent(
                 filterSettings = filterSettings,
                 onApplyClick = {
-                    scope.launch { sheetState.hide() }
+                    isSheetOpen.value = false
                     // TODO: Apply filter settings
                 }
             )
