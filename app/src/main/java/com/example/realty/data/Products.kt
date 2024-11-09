@@ -14,11 +14,11 @@ val sample_product_id = R.drawable.shoes
 
 // Defining sample products
 val productList = listOf(
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
-    Product("Tensaur Sport Training", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Nike Air Force 1", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Nike Dunk", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("New Balance 327", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Chuck Taylor All Star", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Nike Air Max", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("adidas NMD", "SOL 100", 4.6f, 86, sample_product_id),
+    Product("Jordan I High OG", "SOL 100", 4.6f, 86, sample_product_id),
 )

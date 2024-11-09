@@ -1,4 +1,4 @@
-package com.example.realty.ui.screen.components
+package com.example.realty.ui.screen.components.filteredProducts
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -32,7 +32,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.realty.data.Product
-import com.example.realty.data.productList
 import com.example.realty.R
 
 @Composable
@@ -40,6 +39,10 @@ fun FilteredProducts(
     modifier: Modifier,
     query: String
 ){
+
+    // Getting the related list based in the query
+    val relatedList = Search(query)
+
     Column(modifier = modifier.padding(16.dp)) {
         Header()
         Spacer(modifier = Modifier.height(16.dp))
@@ -49,7 +52,7 @@ fun FilteredProducts(
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xfff3f3f3))
         ){
-            ProductGrid(products = productList)
+            ProductGrid(products = relatedList)
         }
     }
 }
