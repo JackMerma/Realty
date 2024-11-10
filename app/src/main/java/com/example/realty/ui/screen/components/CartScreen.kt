@@ -36,12 +36,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.realty.data.Product
 import com.example.realty.R
 import com.example.realty.data.CartItem
 
 @Composable
-fun CartScreen() {
+fun CartScreen(navController: NavController) {
     val cartItems = remember {
         mutableStateListOf(
             CartItem(Product("Tensaur Sport Training", 100f, 4.6f, 86, R.drawable.shoes), 1),
@@ -96,7 +97,9 @@ fun CartScreen() {
             }
 
             Button(
-                onClick = {},
+                onClick = {
+                    navController.navigate("payment_options_screen")
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
             ) {

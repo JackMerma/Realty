@@ -1,5 +1,10 @@
 package com.example.realty.ui.screen.components
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,11 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.example.realty.R
 
 @Composable
@@ -34,25 +41,27 @@ fun WhatAppOptionScreen() {
             Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(16.dp))
 
-            WhatsAppCardOption("Axel")
+            WhatsAppCardOption("Axel", "51951137753")
             Spacer(modifier = Modifier.height(16.dp))
 
-            WhatsAppCardOption("Jackson")
+            WhatsAppCardOption("Jackson", "51913068513")
             Spacer(modifier = Modifier.height(16.dp))
 
-            WhatsAppCardOption("Barbara")
+            WhatsAppCardOption("Barbara", "51901229773")
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 @Composable
-fun WhatsAppCardOption(name: String) {
+fun WhatsAppCardOption(name: String, phoneNumber: String) {
+    val context = LocalContext.current
+
     Card(
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { openWhatsAppChat(context, name, phoneNumber) } // Llamamos a la función openWhatsAppChat
             .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -81,6 +90,18 @@ fun WhatsAppCardOption(name: String) {
     }
 }
 
+fun openWhatsAppChat(context: Context, name: String, phoneNumber: String) {
+    val message = "Hola $name! Quiero realizar el pago de mi compra, realizada por el aplicativo de Rea Kick."
+    val url = "https://wa.me/$phoneNumber?text=${Uri.encode(message)}"
+
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    try {
+        ContextCompat.startActivity(context, intent, null) // Usamos startActivity de manera segura
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(context, "WhatsApp no está instalado", Toast.LENGTH_SHORT).show()
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewYapeOptionScreen() {
@@ -89,13 +110,13 @@ fun PreviewYapeOptionScreen() {
             Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(16.dp))
 
-            WhatsAppCardOption("Axel")
+            WhatsAppCardOption("Axel", "51951137753")
             Spacer(modifier = Modifier.height(16.dp))
 
-            WhatsAppCardOption("Jackson")
+            WhatsAppCardOption("Jackson", "51913068513")
             Spacer(modifier = Modifier.height(16.dp))
 
-            WhatsAppCardOption("Barbara")
+            WhatsAppCardOption("Barbara", "51901229773")
             Spacer(modifier = Modifier.height(16.dp))
         }
     }

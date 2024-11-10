@@ -25,34 +25,52 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.realty.R
 
 @Composable
-fun PaymentOptionsScreen() {
+fun PaymentOptionsScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
             Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.card_payment, "Tarjeta de Credito")
+            CardOption(
+                image = R.drawable.card_payment,
+                text = "Tarjeta de Crédito",
+                onClick = {
+                }
+            )
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.yape_payment, "Billeteras virtuales")
+            CardOption(
+                image = R.drawable.yape_payment,
+                text = "Billeteras virtuales",
+                onClick = {
+                    navController.navigate("virtual_wallet_option_screen")
+                }
+            )
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.whatsapp_payment, "Comunicate por WhatsApp")
+            CardOption(
+                image = R.drawable.whatsapp_payment,
+                text = "Comunicate por WhatsApp",
+                onClick = {
+                    navController.navigate("whatsapp_option_screen")
+                }
+            )
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 @Composable
-fun CardOption(image: Int, text: String) {
+fun CardOption(image: Int, text: String, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { onClick() }
             .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -77,26 +95,6 @@ fun CardOption(image: Int, text: String) {
             ) {
                 Text(text = text, fontWeight = FontWeight.Bold)
             }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewPaymentOptionsScreen() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
-            Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier.height(16.dp))
-
-            CardOption(R.drawable.card_payment, "Tarjeta de Credito")
-            Spacer(modifier = Modifier.height(16.dp))
-
-            CardOption(R.drawable.yape_payment, "Billeteras virtuales")
-            Spacer(modifier = Modifier.height(16.dp))
-
-            CardOption(R.drawable.whatsapp_payment, "Comunicate por WhatsApp")
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

@@ -25,11 +25,20 @@ import com.example.realty.R
 fun VirtualWalletOptionScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
-            Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(
+                "Carrito de Compras",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Billeteras virtuales", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(
+                "Billeteras virtuales",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally)
+            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -37,17 +46,27 @@ fun VirtualWalletOptionScreen() {
                 painter = painterResource(id = R.drawable.qr_whatsapp),
                 contentDescription = "",
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(150.dp)
                     .padding(end = 16.dp)
+                    .align(Alignment.CenterHorizontally)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Text("Escanea el codigo y paga con Yape o Plin", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(
+                "Escanea el código y paga con Yape o Plin",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally)
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Text("Confirmd pago...", fontSize = 16.sp)
+            Text(
+                "Confirmación de pago...",
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally)
+            )
         }
     }
 }
