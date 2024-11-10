@@ -28,26 +28,26 @@ import androidx.compose.ui.unit.sp
 import com.example.realty.R
 
 @Composable
-fun PaymentOptionsScreen() {
+fun WhatAppOptionScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
             Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.card_payment, "Tarjeta de Credito")
+            WhatsAppCardOption("Axel")
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.yape_payment, "Billeteras virtuales")
+            WhatsAppCardOption("Jackson")
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.whatsapp_payment, "Comunicate por WhatsApp")
+            WhatsAppCardOption("Barbara")
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 @Composable
-fun CardOption(image: Int, text: String) {
+fun WhatsAppCardOption(name: String) {
     Card(
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
@@ -64,7 +64,7 @@ fun CardOption(image: Int, text: String) {
             horizontalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = image),
+                painter = painterResource(id = R.drawable.whatsapp_payment),
                 contentDescription = "",
                 modifier = Modifier
                     .size(100.dp)
@@ -75,7 +75,7 @@ fun CardOption(image: Int, text: String) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(1f)
             ) {
-                Text(text = text, fontWeight = FontWeight.Bold)
+                Text(text = "Chatea con $name", fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -83,19 +83,19 @@ fun CardOption(image: Int, text: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPaymentOptionsScreen() {
+fun PreviewYapeOptionScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
             Text("Carrito de Compras", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.card_payment, "Tarjeta de Credito")
+            WhatsAppCardOption("Axel")
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.yape_payment, "Billeteras virtuales")
+            WhatsAppCardOption("Jackson")
             Spacer(modifier = Modifier.height(16.dp))
 
-            CardOption(R.drawable.whatsapp_payment, "Comunicate por WhatsApp")
+            WhatsAppCardOption("Barbara")
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
