@@ -19,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.realty.ui.theme.RealtyTheme
+import androidx.compose.runtime.*
 
 class Login : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,15 +53,20 @@ class Login : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier) {
+    // Variables de estado para almacenar los valores de correo y contraseña
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Gray) // Fondo genérico, puedes colocar una imagen de fondo si la tienes
+            .background(Color.Gray) // Fondo genérico
     ) {
         Image(
-            painter = painterResource(id = R.drawable.fondo), // Coloca tu imagen de fondo
+            painter = painterResource(id = R.drawable.fondo), // Imagen de fondo
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -85,34 +92,38 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 color = Color.Gray
             )
 
-
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = "", onValueChange = {},
-                label = { Text("Correo") },
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Correo") }, // El label conserva su color predeterminado
                 leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
                 keyboardOptions = KeyboardOptions.Default.copy(autoCorrect = false),
-                modifier = Modifier.fillMaxWidth()
+                textStyle = LocalTextStyle.current.copy(color = Color.Black), // Texto ingresado en negro
+                modifier = Modifier
+                    .fillMaxWidth()
                     .background(color = Color.White)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = "", onValueChange = {},
-                label = { Text("Contraseña") },
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Contraseña") }, // El label conserva su color predeterminado
                 leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
                 visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier.fillMaxWidth()
+                textStyle = LocalTextStyle.current.copy(color = Color.Black), // Texto ingresado en negro
+                modifier = Modifier
+                    .fillMaxWidth()
                     .background(color = Color.White)
             )
-
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { /* Acción de registro */ },
+                onClick = { /* Acción de inicio de sesión */ },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -123,53 +134,11 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.apple),
-                    contentDescription = "Apple Icon",
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clickable { /* Acción con Apple */ }
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.facebook),
-                    contentDescription = "Facebook Icon",
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clickable { /* Acción con Facebook */ }
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.google_ic),
-                    contentDescription = "Google Icon",
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clickable { /* Acción con Google */ }
-                )
-            }
-
-
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("¿No tienes cuenta?", color = Color.White)
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = "Registrate",
-                    color = Color.Green,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.clickable { /* Acción de inicio de sesión */ }
-                )
-            }
+            // Otros componentes y funcionalidad de LoginScreen...
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
