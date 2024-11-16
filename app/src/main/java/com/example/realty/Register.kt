@@ -204,7 +204,7 @@ fun RegistroScreen(modifier: Modifier = Modifier) {
                     text = "Inicia Sesión",
                     color = Color.Green,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.clickable { /* Acción de inicio de sesión */ }
+                    modifier = Modifier.clickable { /* Accident de inicio de sesión */ }
                 )
             }
         }
